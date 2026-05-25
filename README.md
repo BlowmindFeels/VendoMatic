@@ -14,6 +14,8 @@ La aplicación está desarrollada con:
 El sistema permite administrar información como:
 
 - Nombre de la máquina
+- Entorno simulado
+- Login usuario y admin
 - Ubicación
 - Capacidad
 - Estado
