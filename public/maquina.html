@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Máquina</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="vm-body">
+  <div class="vm-page">
+
+    <header class="vm-topbar">
+      <a href="/" class="btn btn-secondary btn-small vm-back">← Inicio</a>
+      <div class="vm-topbar-info">
+        <div class="vm-topbar-title" id="vmTitle">Cargando...</div>
+        <div class="vm-topbar-sub" id="vmSub"></div>
+      </div>
+      <div class="vm-topbar-user">
+        <span id="vmUser"></span>
+        <span class="badge badge-blue" id="vmRole"></span>
+        <button class="btn btn-secondary btn-small" id="vmLogout">Salir</button>
+      </div>
+    </header>
+
+    <main class="vm-main">
+      <div class="vending-machine" id="vendingMachine">
+
+        <!-- Techo / branding -->
+        <div class="vm-roof">
+          <div class="vm-brand">VEND<span>O</span>MATIC</div>
+          <div class="vm-rivets">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- Display LED -->
+        <div class="vm-led-panel">
+          <div class="vm-led-name" id="ledName">MÁQUINA</div>
+          <div class="vm-led-status" id="ledStatus">● CARGANDO</div>
+        </div>
+
+        <!-- Vidrio con productos -->
+        <div class="vm-glass-panel">
+          <div class="vm-slots-grid" id="slotsGrid"></div>
+        </div>
+
+        <!-- Panel inferior -->
+        <div class="vm-bottom-panel">
+          <div class="vm-stock-section">
+            <div class="vm-stock-label">
+              <span class="vm-stock-text">STOCK</span>
+              <span class="vm-stock-nums" id="stockLabel">0 / 0</span>
+            </div>
+            <div class="vm-meter-track">
+              <div class="vm-meter-fill" id="meterFill"></div>
+            </div>
+          </div>
+          <div class="vm-hardware-row">
+            <div class="vm-coin-area">
+              <div class="vm-coin-slot"></div>
+              <div class="vm-coin-label">INSERT COIN</div>
+            </div>
+            <div class="vm-keypad">
+              <div class="vm-key"></div><div class="vm-key"></div><div class="vm-key"></div>
+              <div class="vm-key"></div><div class="vm-key"></div><div class="vm-key"></div>
+            </div>
+            <div class="vm-dispense-area">
+              <div class="vm-dispense-hole"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+  <script src="/js/vending.js"></script>
+</body>
+</html>

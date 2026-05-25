@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleccionar Máquina</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="user-bar">
+    <div class="user-bar-info">
+      Hola, <strong id="currentUser"></strong>
+      <span class="badge badge-green" id="currentRole"></span>
+    </div>
+    <button class="btn btn-secondary btn-small" id="btnLogout">Cerrar sesión</button>
+  </div>
+
+  <div class="app-container">
+    <header class="page-header">
+      <h1>Máquinas Disponibles</h1>
+      <p>Selecciona una máquina para abrir su simulador interactivo.</p>
+    </header>
+    <div id="machineGrid" class="machine-grid"></div>
+  </div>
+
+  <script>
+    const estadoClass = e => ({ llena:"badge-green", media:"badge-yellow", baja:"badge-orange", "crítica":"badge-red", vacía:"badge-gray", activo:"badge-green", activa:"badge-green", inactivo:"badge-gray", inactiva:"badge-gray", mantenimiento:"badge-blue" }[e.toLowerCase()] || "badge-gray");
+
+    async function init() {
+      const authRes = await fetch("/auth/me");
+      if (!authRes.ok) { location.href = "/login.html"; return; }
+      const user = await authRes.json();
+      document.getElementById("currentUser").textContent = user.username;
+      document.getElementById("currentRole").textContent = user.rol;
+
+      document.getElementById("btnLogout").addEventListener("click", async () => {
+        await fetch("/auth/logout", { method: "POST" });
+        location.href = "/login.html";
+      });
+
+      const res      = await fetch("/maquinas");
+      const maquinas = await res.json();
+      const grid     = document.getElementById("machineGrid");
+
+      if (!maquinas.length) {
+        grid.innerHTML = `<p style="text-align:center;color:var(--muted);padding:48px 0">No hay máquinas disponibles.</p>`;
+        return;
+      }
+
+      maquinas.forEach(m => {
+        const card = document.createElement("div");
+        card.className = "machine-card";
+        card.innerHTML = `
+          <div class="machine-card-icon">🏪</div>
+          <div class="machine-card-name">${m.nombre}</div>
+          <div class="machine-card-meta"><span>📍</span> ${m.ubicacion}</div>
+          <div class="machine-card-meta"><span>📦</span> Capacidad: ${m.capacidad}</div>
+          <span class="badge ${estadoClass(m.estado)} machine-card-badge">${m.estado}</span>
+          <a href="/maquina.html?id=${m.id}" class="btn btn-primary machine-card-btn">Ver Simulador →</a>`;
+        grid.appendChild(card);
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

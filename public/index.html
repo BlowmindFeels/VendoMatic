@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Máquinas Expendedoras</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="user-bar">
+    <div class="user-bar-info">
+      Bienvenido, <strong id="currentUser"></strong>
+      <span class="badge badge-blue" id="currentRole"></span>
+    </div>
+    <button class="btn btn-secondary btn-small" id="btnLogout">Cerrar sesión</button>
+  </div>
+
+  <div class="app-container">
+    <header class="page-header">
+      <h1>Gestión de Máquinas Expendedoras</h1>
+      <p>Registra, edita y elimina máquinas expendedoras desde una interfaz clara, moderna y optimizada para móviles.</p>
+    </header>
+
+    <section class="card">
+      <form id="maquinaForm" class="form-grid">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="ubicacion" placeholder="Ubicación" required>
+        <input type="number" id="capacidad" placeholder="Capacidad" required>
+        <select id="estado" required>
+          <option value="" disabled selected>Estado</option>
+          <option value="Activa">Activa</option>
+          <option value="Inactiva">Inactiva</option>
+          <option value="Mantenimiento">Mantenimiento</option>
+          <option value="Llena">Llena</option>
+          <option value="Media">Media</option>
+          <option value="Baja">Baja</option>
+          <option value="Crítica">Crítica</option>
+          <option value="Vacía">Vacía</option>
+        </select>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Agregar</button>
+          <button type="button" id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="caption">Lista de máquinas expendedoras registradas</div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Ubicación</th>
+              <th>Capacidad</th>
+              <th>Stock Actual</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaMaquinas"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
